@@ -28,7 +28,7 @@ from aoc.day_three.day3 import (
             "...*......",
             (
                 [],
-                [3],
+                [(3, "*")],
             ),
         ),
         (
@@ -47,19 +47,20 @@ from aoc.day_three.day3 import (
                 [
                     Number(value=617, col_range=(0, 3)),
                 ],
-                [3],
+                [(3, "*")],
             ),
         ),
         (
             "...$.*..47",
             (
                 [Number(value=47, col_range=(8, 10))],
-                [3, 5],
+                [(3, "$"), (5, "*")],
             ),
         ),
     ],
 )
 def test_decode_line(input_str, expected):
+    """Test the decode_line function."""
     assert decode_line(input_str) == expected
 
 
@@ -74,7 +75,8 @@ def test_decode_line(input_str, expected):
         ),
     ],
 )
-def test_calc_adjacent_positions(start, stop, row, expected):
+def test_calc_adjacent_positions(start, stop, row, expected) -> None:
+    """Tests the calc_adjacent_positions function."""
     assert calc_adjacent_positions(start=start, stop=stop, row=row) == expected
 
 
@@ -84,10 +86,7 @@ def test_day_one():
     assert part_one(input_lines) == 4361
 
 
-@pytest.mark.parametrize(
-    "input_lines, expected_output", [(["one", "two", "three"], 123)]
-)
-@pytest.mark.skip("Not Implemented")
-def test_day_two(input_lines, expected_output) -> None:
+def test_day_two() -> None:
     """Tests day two"""
-    assert part_two(input_lines) == expected_output
+    input_lines = parse_lines_from_file("aoc/day_three/example2.txt")
+    assert part_two(input_lines) == 467835
