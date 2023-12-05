@@ -72,19 +72,19 @@ def part_two(input_lines: list[str]) -> int:
     """
     total = 0
     cards = {
-        num: {"quantity": 1, "winning_numbers": 0}
-        for num in range(1, len(input_lines) + 1)
+        card_num: {"quantity": 1, "winning_numbers": 0}
+        for card_num in range(1, len(input_lines) + 1)
     }
 
-    for card_num, line in enumerate(input_lines, start=1):
+    for current_card_num, line in enumerate(input_lines, start=1):
         winning_nums, ticket_nums = parse_input_line(line)
         intersection = winning_nums.intersection(ticket_nums)
         num_wins = len(intersection)
-        cards[card_num]["winning_numbers"] = num_wins
-        quantity_current_ticket = cards[card_num]["quantity"]
+        cards[current_card_num]["winning_numbers"] = num_wins
+        quantity_current_card = cards[current_card_num]["quantity"]
         for i in range(1, num_wins + 1):
-            if card_num + i <= len(input_lines):
-                cards[card_num + i]["quantity"] += 1 * quantity_current_ticket
+            if current_card_num + i <= len(input_lines):
+                cards[current_card_num + i]["quantity"] += 1 * quantity_current_card
 
     for card_info in cards.values():
         total += card_info["quantity"]
